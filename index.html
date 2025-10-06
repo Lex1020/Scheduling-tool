@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scheduling Tool</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Instructor Scheduling Tool</h1>
+      <p class="tagline">
+        Track classes, rooms, and instructor hours in one convenient view.
+      </p>
+    </header>
+
+    <main>
+      <section class="card" aria-labelledby="add-schedule-heading">
+        <div class="card-header">
+          <h2 id="add-schedule-heading">Add Class Session</h2>
+          <p class="helper-text">
+            Provide the instructor, class title, duration (in hours), and the room.
+          </p>
+        </div>
+        <form id="schedule-form" novalidate>
+          <div class="form-grid">
+            <label class="form-field">
+              <span>Instructor<span aria-hidden="true">*</span></span>
+              <input
+                type="text"
+                id="instructor"
+                name="instructor"
+                required
+                placeholder="e.g., Alex Johnson"
+                autocomplete="off"
+              />
+              <small class="error" data-error-for="instructor"></small>
+            </label>
+
+            <label class="form-field">
+              <span>Class<span aria-hidden="true">*</span></span>
+              <input
+                type="text"
+                id="className"
+                name="className"
+                required
+                placeholder="e.g., Intro to Pottery"
+                autocomplete="off"
+              />
+              <small class="error" data-error-for="className"></small>
+            </label>
+
+            <label class="form-field">
+              <span>Duration (hours)<span aria-hidden="true">*</span></span>
+              <input
+                type="number"
+                id="duration"
+                name="duration"
+                required
+                min="0.25"
+                step="0.25"
+                placeholder="e.g., 1.5"
+              />
+              <small class="error" data-error-for="duration"></small>
+            </label>
+
+            <label class="form-field">
+              <span>Room<span aria-hidden="true">*</span></span>
+              <input
+                type="text"
+                id="room"
+                name="room"
+                required
+                placeholder="e.g., Studio B"
+                autocomplete="off"
+              />
+              <small class="error" data-error-for="room"></small>
+            </label>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="primary">Add to Schedule</button>
+            <button type="button" class="secondary" id="clear-all">Clear All</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card" aria-labelledby="schedule-heading">
+        <div class="card-header">
+          <h2 id="schedule-heading">Class Schedule</h2>
+          <p class="helper-text">
+            Review upcoming sessions, organized by instructor and room.
+          </p>
+        </div>
+        <div class="table-container">
+          <table id="schedule-table">
+            <thead>
+              <tr>
+                <th scope="col">Instructor</th>
+                <th scope="col">Class</th>
+                <th scope="col">Duration (hrs)</th>
+                <th scope="col">Room</th>
+                <th scope="col" class="actions-column">Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <p id="empty-state" class="empty-state">No sessions scheduled yet.</p>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="instructor-hours-heading">
+        <div class="card-header">
+          <h2 id="instructor-hours-heading">Instructor Hours</h2>
+          <p class="helper-text">
+            Total scheduled hours are automatically calculated for each instructor.
+          </p>
+        </div>
+        <div class="table-container">
+          <table id="hours-table">
+            <thead>
+              <tr>
+                <th scope="col">Instructor</th>
+                <th scope="col">Total Hours</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <p id="hours-empty-state" class="empty-state">No instructor hours to display.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Built to simplify class scheduling and instructor management.</p>
+    </footer>
+
+    <template id="schedule-row-template">
+      <tr>
+        <td data-field="instructor"></td>
+        <td data-field="className"></td>
+        <td data-field="duration"></td>
+        <td data-field="room"></td>
+        <td class="actions-column">
+          <button type="button" class="link" data-action="delete">Remove</button>
+        </td>
+      </tr>
+    </template>
+
+    <template id="hours-row-template">
+      <tr>
+        <td data-field="instructor"></td>
+        <td data-field="total"></td>
+      </tr>
+    </template>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
